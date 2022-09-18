@@ -1,0 +1,7 @@
+az ts create \
+  --name demospec \
+  --version 1 \
+  --resource-group blog \
+  --location eastus \
+  --template-file ./deploy.json \
+  --ui-form-definition ./UIfile.json
