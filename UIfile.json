@@ -1,0 +1,319 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2021-09-09/uiFormDefinition.schema.json",
+    "view": {
+        "kind": "Form",
+        "properties": {
+            "title": "Test Form View",
+            "steps": [
+                {
+                    "name": "basics",
+                    "label": "Basics",
+                    "elements": [
+                        {
+                            "name": "resourceScope",
+                            "type": "Microsoft.Common.ResourceScope",
+                            "location": {
+                                "resourceTypes": [
+                                    "microsoft.sql/servers",
+                                    "microsoft.devices/iothubs",
+                                    "microsoft.resources/resourcegroups"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "iotHubName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Iot Hub Name",
+                            "defaultValue": "",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "sqlServerName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Sql Server Name",
+                            "defaultValue": "",
+                            "toolTip": "name of sql server",
+                            "constraints": {
+                                "required": true,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "sqlUserName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Sql User Name",
+                            "defaultValue": "EdgeSolutionSQLuser",
+                            "toolTip": "sqlusername",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "sqlPassword",
+                            "type": "Microsoft.Common.PasswordBox",
+                            "label": {
+                                "password": "Sql Password",
+                                "confirmPassword": "Confirm password"
+                            },
+                            "toolTip": "sql password",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "options": {
+                                "hideConfirmation": true
+                            },
+                            "visible": true
+                        }
+                    ]
+                },
+                {
+                    "name": "vmConfig",
+                    "label": "Virtual machine configuration",
+                    "elements": [
+                        {
+                            "name": "createNewVm",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Create New Vm",
+                            "defaultValue": "true",
+                            "toolTip": "",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "true",
+                                        "value": true
+                                    },
+                                    {
+                                        "label": "false",
+                                        "value": false
+                                    }
+                                ]
+                            },
+                            "visible": true
+                        },
+                        {
+                            "name": "vmName",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Vm Name",
+                            "defaultValue": "egdeSolution-vmT4",
+                            "toolTip": "The name of you Virtual Machine.",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": "[bool(steps('vmConfig').createNewVm)]"
+                        },
+                        {
+                            "name": "vmLocation",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Vm Location",
+                            "defaultValue": "West US",
+                            "toolTip": "Location for all resources.",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "(US) West US 2",
+                                        "value": "(US) West US 2"
+                                    },
+                                    {
+                                        "label": "East US",
+                                        "value": "East US"
+                                    },
+                                    {
+                                        "label": "West US",
+                                        "value": "West US"
+                                    },
+                                    {
+                                        "label": "South Central US",
+                                        "value": "South Central US"
+                                    },
+                                    {
+                                        "label": "North Europe",
+                                        "value": "North Europe"
+                                    },
+                                    {
+                                        "label": "East Asia",
+                                        "value": "East Asia"
+                                    },
+                                    {
+                                        "label": "Japan East",
+                                        "value": "Japan East"
+                                    },
+                                    {
+                                        "label": "West Europe",
+                                        "value": "West Europe"
+                                    },
+                                    {
+                                        "label": "Southeast Asia",
+                                        "value": "Southeast Asia"
+                                    },
+                                    {
+                                        "label": "Japan West",
+                                        "value": "Japan West"
+                                    },
+                                    {
+                                        "label": "North Central US",
+                                        "value": "North Central US"
+                                    },
+                                    {
+                                        "label": "Central US",
+                                        "value": "Central US"
+                                    },
+                                    {
+                                        "label": "Brazil South",
+                                        "value": "Brazil South"
+                                    },
+                                    {
+                                        "label": "East US 2",
+                                        "value": "East US 2"
+                                    },
+                                    {
+                                        "label": "Australia Southeast",
+                                        "value": "Australia Southeast"
+                                    },
+                                    {
+                                        "label": "Australia East",
+                                        "value": "Australia East"
+                                    }
+                                ]
+                            },
+                            "visible": "[bool(steps('vmConfig').createNewVm)]"
+                        },
+                        {
+                            "name": "vmSize",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Vm Size",
+                            "defaultValue": "Standard_NC4as_T4_v3",
+                            "toolTip": "The size of the VM",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": "[bool(steps('vmConfig').createNewVm)]"
+                        },
+                        {
+                            "name": "adminUsername",
+                            "type": "Microsoft.Common.TextBox",
+                            "label": "Admin Username",
+                            "defaultValue": "azureuser",
+                            "toolTip": "Username for the Virtual Machine.",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "visible": "[bool(steps('vmConfig').createNewVm)]"
+                        },
+                        {
+                            "name": "authenticationType",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Authentication Type",
+                            "defaultValue": "password",
+                            "toolTip": "Type of authentication to use on the Virtual Machine. SSH key is recommended.",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "sshPublicKey",
+                                        "value": "sshPublicKey"
+                                    },
+                                    {
+                                        "label": "password",
+                                        "value": "password"
+                                    }
+                                ]
+                            },
+                            "visible": "[bool(steps('vmConfig').createNewVm)]"
+                        },
+                        {
+                            "name": "adminPasswordOrKey",
+                            "type": "Microsoft.Common.PasswordBox",
+                            "label": {
+                                "password": "Admin Password Or Key",
+                                "confirmPassword": "Confirm password"
+                            },
+                            "toolTip": "SSH Key or password for the Virtual Machine. SSH key is recommended.",
+                            "constraints": {
+                                "required": false,
+                                "regex": "",
+                                "validationMessage": ""
+                            },
+                            "options": {
+                                "hideConfirmation": true
+                            },
+                            "visible": "[bool(steps('vmConfig').createNewVm)]"
+                        },
+                        {
+                            "name": "ubuntuOSVersion",
+                            "type": "Microsoft.Common.DropDown",
+                            "label": "Ubuntu OS Version",
+                            "defaultValue": "20.04-LTS",
+                            "toolTip": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version.",
+                            "constraints": {
+                                "required": false,
+                                "allowedValues": [
+                                    {
+                                        "label": "12.04.5-LTS",
+                                        "value": "12.04.5-LTS"
+                                    },
+                                    {
+                                        "label": "14.04.5-LTS",
+                                        "value": "14.04.5-LTS"
+                                    },
+                                    {
+                                        "label": "16.04.0-LTS",
+                                        "value": "16.04.0-LTS"
+                                    },
+                                    {
+                                        "label": "18.04-LTS",
+                                        "value": "18.04-LTS"
+                                    },
+                                    {
+                                        "label": "20.04-LTS",
+                                        "value": "20.04-LTS"
+                                    }
+                                ]
+                            },
+                            "visible": "[bool(steps('vmConfig').createNewVm)]"
+                        }
+                    ]
+                }
+            ]
+        },
+        "outputs": {
+            "parameters": {
+                "createNewVm": "[steps('vmConfig').createNewVm]",
+                "vmName": "[steps('vmConfig').vmName]",
+                "vmLocation": "[steps('vmConfig').vmLocation]",
+                "vmSize": "[steps('vmConfig').vmSize]",
+                "adminUsername": "[steps('vmConfig').adminUsername]",
+                "authenticationType": "[steps('vmConfig').authenticationType]",
+                "adminPasswordOrKey": "[steps('vmConfig').adminPasswordOrKey]",
+                "ubuntuOSVersion": "[steps('vmConfig').ubuntuOSVersion]",
+                "iotHubName": "[steps('basics').iotHubName]",
+                "sqlServerName": "[steps('basics').sqlServerName]",
+                "sqlUserName": "[steps('basics').sqlUserName]",
+                "sqlPassword": "[steps('basics').sqlPassword]"
+            },
+            "kind": "ResourceGroup",
+            "location": "[steps('basics').resourceScope.location.name]",
+            "resourceGroupId": "[steps('basics').resourceScope.resourceGroup.id]"
+        }
+    }
+}
